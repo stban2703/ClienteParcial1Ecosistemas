@@ -17,9 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText posxT;
     private EditText posyT;
     private EditText recorT;
-    private RadioButton leveBtn;
-    private RadioButton mediaBtn;
-    private RadioButton altaBtn;
+    private EditText importanciaT;
     private Button vistaBtn;
     private Button confirmarBtn;
 
@@ -37,24 +35,23 @@ public class MainActivity extends AppCompatActivity {
         comm = new ComunicacionTCP(this);
         comm.solicitarConexion();
 
+        importanciaT = findViewById(R.id.importanciaT);
         posxT = findViewById(R.id.posxT);
         posyT = findViewById(R.id.posyT);
         recorT = findViewById(R.id.recorT);
-        leveBtn = findViewById(R.id.leveBtn);
-        mediaBtn = findViewById(R.id.mediaBtn);
-        altaBtn = findViewById(R.id.altaBtn);
         vistaBtn = findViewById(R.id.vistaBtn);
         confirmarBtn = findViewById(R.id.confirmarBtn);
 
         confirmarBtn.setOnClickListener(
                 (v) -> {
+                    importancia = importanciaT.getText().toString();
                     posX = posxT.getText().toString();
                     posY = posyT.getText().toString();
                     recordatorio = recorT.getText().toString();
 
-                    mensajeRecordatorio = posX +"," + posY +"," + recordatorio;
+                    mensajeRecordatorio = posX +"," + posY +"," + recordatorio +"," + importancia;
 
-                    if(!posX.equals("") && !posY.equals("") && !recordatorio.equals("")) {
+                    if(!posX.equals("") && !posY.equals("") && !recordatorio.equals("") && !importancia.equals("")) {
                         comm.mandarMensaje(mensajeRecordatorio);
 
                     } else {
